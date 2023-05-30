@@ -9,11 +9,11 @@ export default defineConfig({
 	plugins: [
 		sveltekit(),
 		SvelteKitPWA({
-			strategies: 'injectManifest',
+			strategies: process.env.NODE_ENV !== 'production' ? 'injectManifest' : 'generateSW',
 			srcDir: 'src',
 			filename: 'service-worker.js',
 			devOptions: {
-				enabled: true,
+				enabled: process.env.NODE_ENV !== 'production',
 				type: 'module',
 				navigateFallback: '/'
 			}
